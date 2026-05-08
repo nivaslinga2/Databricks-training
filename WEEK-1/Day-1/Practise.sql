@@ -149,3 +149,69 @@ SELECT
   AVG(salary) AS avg_salary
 FROM Employee
 GROUP BY department_id;
+--question 21
+SELECT
+  department_id,
+  SUM(salary) AS total_salary
+FROM Employee
+GROUP BY department_id;
+--question 22
+SELECT
+  department_id,
+  AVG(age) AS average_age
+FROM Employee
+GROUP BY department_id;
+--question 23
+SELECT
+  YEAR(hire_date) AS hire_year,
+  COUNT(*) AS employees_hired
+FROM Employee
+GROUP BY YEAR(hire_date);
+--question 24
+SELECT
+  department_id,
+  MAX(salary) AS highest_salary
+FROM Employee
+GROUP BY department_id;
+--question 25
+SELECT
+  department_id,
+  AVG(salary) AS average_salary
+FROM Employee
+GROUP BY department_id
+ORDER BY average_salary DESC
+-- question 26
+SELECT
+  department_id,
+  COUNT(*) AS employee_count
+FROM Employee
+GROUP BY department_id
+HAVING COUNT(*) > 2;
+-- question 27
+SELECT
+  department_id,
+  AVG(salary) AS average_salary
+FROM Employee
+GROUP BY department_id
+HAVING AVG(salary) > 55000;
+-- question 28
+SELECT
+  YEAR(hire_date) AS hire_year,
+  COUNT(*) AS employees_hired
+FROM Employee
+GROUP BY YEAR(hire_date)
+HAVING COUNT(*) > 1;
+-- question 29
+SELECT
+  department_id,
+  SUM(salary) AS total_salary
+FROM Employee
+GROUP BY department_id
+HAVING SUM(salary) < 100000;
+-- question 30
+SELECT
+  department_id,
+  MAX(salary) AS max_salary
+FROM Employee
+GROUP BY department_id
+HAVING MAX(salary) > 75000;
