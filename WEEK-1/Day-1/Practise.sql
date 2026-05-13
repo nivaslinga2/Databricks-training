@@ -215,3 +215,222 @@ SELECT
 FROM Employee
 GROUP BY department_id
 HAVING MAX(salary) > 75000;
+--question 31
+SELECT *
+FROM Employee
+ORDER BY salary ASC
+--QUESTION 32
+SELECT *
+FROM Employee
+ORDER BY age DESC
+--Question 33
+SELECT *
+FROM Employee
+ORDER BY hire_date ASC
+--Question 34
+SELECT *
+FROM Employee
+ORDER BY department_id, salary;
+--Question 35
+SELECT department_id,SUM(salary) AS total_salary
+FROM Employee
+GROUP BY department_id
+ORDER BY total_salary;
+--Question 36
+SELECT 
+Employee.name,
+Department.name
+FROM Employee
+JOIN Department
+ON Employee.department_id=Department.department_id
+--Question 37
+SELECT 
+Department.name,
+Project.name
+FROM Department
+JOIN Project
+ON Project.department_id=Department.department_id
+--Question 38
+SELECT 
+Employee.name,
+Project.name
+FROM Project
+JOIN Employee
+ON Employee.department_id=Project.department_id
+--Quesstion 39
+SELECT 
+Employee.name,
+Department.name
+FROM Employee
+ LEFT JOIN Department
+ON Employee.department_id=Department.department_id
+--Question 40
+SELECT 
+Employee.name,
+Department.name
+FROM Department
+LEFT JOIN Employee
+ON Employee.department_id=Department.department_id
+--Question 41
+SELECT 
+Employee.name
+FROM Employee
+LEFT JOIN Project
+ON Employee.department_id=Project.department_id
+WHERE Project.project_id IS NULL;
+--Question 42
+SELECT 
+Employee.name,
+COUNT(Project.project_id) AS total_projects
+FROM Employee
+JOIN Project
+ON Employee.department_id=Project.department_id
+GROUP BY Employee.name;
+--Question 43
+SELECT 
+Department.name
+FROM Department
+LEFT JOIN Employee
+ON Employee.department_id=Department.department_id
+WHERE Employee.emp_id IS NULL;
+--Question 44
+SELECT *
+FROM Employee
+WHERE department_id=1
+--Question 45
+SELECT 
+Department.name,AVG(salary) AS avg_salary
+FROM Employee
+JOIN Department
+ON Employee.department_id=Department.department_id
+GROUP BY Department.name
+ORDER BY avg_salary DESC
+LIMIT 1;
+--Question 46
+SELECT 
+Employee.name,MAX(salary) AS max_salary
+FROM Employee
+GROUP BY Employee.name
+ORDER BY max_salary DESC
+LIMIT 1;
+--Question 47
+SELECT *
+FROM Employee
+WHERE salary >(
+  SELECT AVG(salary)
+  FROM Employee
+  )
+--Question 48
+SELECT DISTINCT salary
+FROM Employee
+ORDER BY salary DESC
+LIMIT 1 OFFSET 1;
+--Question 49
+SELECT Department.name,COUNT(Employee.emp_id) AS total_emp
+FROM Employee
+JOIN Department
+ON Employee.department_id=Department.department_id
+GROUP BY Department.name
+ORDER BY total_emp DESC
+LIMIT 1;
+--Question 50
+SELECT *
+FROM Employee e1
+WHERE salary>(
+  SELECT AVG(salary)
+  FROM Employee e2
+  WHERE e1.department_id=e2.department_id
+);
+--Question 51
+SELECT DISTINCT salary
+FROM Employee 
+ORDER BY salary DESC
+LIMIT 1 OFFSET 2;
+--Question 52
+SELECT *
+FROM Employee 
+WHERE age>(
+  SELECT MAX(age)
+  FROM Employee
+  WHERE department_id=2
+  );
+--Question 53
+SELECT department_id,AVG(salary)
+FROM Employee 
+GROUP BY department_id
+ORDER BY AVG(salary)>55000
+--Question 54
+SELECT Employee.name
+FROM Employee 
+JOIN Project
+ON Employee.department_id=Project.Department_id
+GROUP BY Employee.name
+HAVING COUNT(Project.project_id)>=2;
+--Question 55
+SELECT *
+FROM Employee 
+WHERE hire_date='2019-07-23';
+--Question 56
+SELECT SUM(salary)
+FROM Employee 
+WHERE YEAR(hire_date)='2020';
+--Question 57
+SELECT department_id,AVG(salary) AS avg_salary
+FROM Employee 
+GROUP BY department_id
+ORDER BY avg_salary DESC;
+--Question 58
+SELECT department_id,AVG(salary),COUNT(*) 
+FROM Employee 
+GROUP BY department_id
+HAVING COUNT(*)>1
+AND AVG(salary)>55000
+--Question 59
+SELECT *
+FROM Employee 
+WHERE hire_date>=YEAR(CURDATE())-2
+ORDER BY hire_date
+--Question 60
+SELECT department_id,count(*) AS total_emp, AVG(salary) AS avg_salary
+FROM Employee 
+GROUP BY department_id
+HAVING COUNT(*)>=2;
+--Question 61
+SELECT 
+    name,
+    salary
+FROM Employee e
+WHERE salary > (
+    SELECT AVG(salary)
+    FROM Employee
+    WHERE department_id = e.department_id
+);
+--question 62
+SELECT name
+FROM Employee
+WHERE hire_date = (
+    SELECT MIN(hire_date)
+    FROM Employee
+);
+--Question 63
+SELECT Department.name,COUNT(Project.project_id) AS total_projects
+FROM Department
+JOIN Project
+ON Department.department_id=Project.department_id
+GROUP BY Department.name
+ORDER BY total_project;
+--question 64
+SELECT name,salary,department_id
+FROM Employee e1
+WHERE salary=(
+  SELECT MAX(salary)
+  FROM Employee e2
+  WHERE e1.department_id=e2.department_id
+  );
+--question 65
+SELECT name,salary
+FROM Employee
+WHERE age> (
+  SELECT AVG(age)
+  FROM Employee
+  );
